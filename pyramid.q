@@ -7,11 +7,3 @@ pyr:{[p]
  }
 
 / pyr over reverse p
-
-
-fib:{[n]
-    {
-    x+y}scan 1+til n
-
-
-}
