@@ -5,3 +5,8 @@ genSyms:{[n]
  }
 
 {0N!((genSyms x)~genSyms2 x)}each 1 2 3 4 5 / for testing
+
+/
+Kieran
+
+genSyms:{$[x=1;`$'.Q.A;`$(cross/)x#enlist .Q.A]}
