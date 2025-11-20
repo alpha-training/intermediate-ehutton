@@ -1,0 +1,12 @@
+[package]
+name = "rustReverse"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+# Change this line from "0.4" to "0.3.0"
+kdb = "0.3.0" 
+
+[lib]
+name = "rustreverse"
+crate-type = ["cdylib"]
