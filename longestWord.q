@@ -1,1 +1,1 @@
-longestWord:{(" "vs x)(count each " "vs x)?max count each " "vs x}
+longestWord:{w (count each w)?max count each w:" "vs x}
