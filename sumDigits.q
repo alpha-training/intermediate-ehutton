@@ -1,0 +1,1 @@
+sumDigits:{sum "H"$/:string x}
