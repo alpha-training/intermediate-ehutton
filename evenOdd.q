@@ -1,5 +1,4 @@
-evenOdd:{k:x where 0=x mod 2;
-    k,x except k}
+evenOdd:{k,x except k:x where 0=x mod 2}
 
 /
 q)evenOdd 1 2 3 4 5
