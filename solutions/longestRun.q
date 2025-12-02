@@ -1,4 +1,4 @@
-longestRun:{ / x:3 6 2 3 4 8 3 4 5 6 1 4 2 3 4 5 6 7
+longestRun:{
     k:x where(next[x]=x+1)or prev[x]=x-1; / list of all runs  2 3 4 3 4 5 6 2 3 4 5 6 7
     s:where not prev[k]=k-1; / indices where the run starts
     L:1_(deltas s,count k); / lenght of each run
