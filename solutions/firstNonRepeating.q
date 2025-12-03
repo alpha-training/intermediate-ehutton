@@ -1,1 +1,1 @@
-firstNonRepeating:{x? x where not(x=prev x)|x=next x}
+firstNonRepeating:{first x where not(x=prev x)or x=next x}
