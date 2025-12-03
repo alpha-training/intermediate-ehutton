@@ -1,8 +1,9 @@
 longestRun:{
-    k:x where(next[x]=x+1)or prev[x]=x-1; / list of all runs  2 3 4 3 4 5 6 2 3 4 5 6 7
-    s:where not prev[k]=k-1; / indices where the run starts
-    L:1_(deltas s,count k); / lenght of each run
-    e:1_(s-1),count[k]-1; / index where the run ends 
-    (first k[s where L=max L])+til max 1+e-s
-
+  d:1=1_deltas x;
+  b:where 1b,not[d],1b; / where the runs are split
+  length:-1+1_deltas b;
+  m:first where length=max length; / index of the max length
+  s:b[m]; / start if longest run
+  l:length[m]+1; / +1 because deltas is 1 shorter than x
+  x s+til l
  }
