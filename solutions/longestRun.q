@@ -7,14 +7,49 @@ longestRun:{
   s:b m; / start if longest run
   l:1+len m; / +1 because deltas is 1 shorter than x
   x s+til l
+ 
+ 
  }
+
 longestRun3:{
-  len:-1+trim 0N-':b:where 1b,not[1=trim 0N-':x],1b;
-  s:b m:first where len=max len; / start if longest run
-  x s+til 1+len m
+  a1:([]i:til count x;d:1=0N-':x); / table with index and boolean check
+  b:exec i from a1 where not d; / keep only start indices
+  len:1_deltas b,count x; / next start - current start
+  m:first where len=max len; / index of the max length
+  s:b m; / start of longest run
+  l:len m;  / length of longest run
+  x[s]+til l
+ }
+
+longestRun4:{
+  a1:([]v:x;d:1=0N-':x;ind:til count x); / table with index and boolean check
+  a2:delete from a1 where (d=0)&0=next d; / from where we just need to get where one run starts and another run ends
+  a3:select from a2 where (d=0) or 0=next d;
+  a4:update l:0N-':ind from a3;
+  a5:select from a4 where d=1;
+  a6:select from a5 where l=max l
+  reverse (first a6`l){x-1}\first a6`v
+  }
+
+
+/
+
+s:exec v from a4 where not d;
+e:exec v from a4 where d;
+
+
+longestRun3:{ / longestRun3 x:3 1 2 9 4 8 3 4 5 6 1 4 2 3 4 5 6 7
+    x:x,0;
+    a1:([]1=0N-':x;ind:til count x);
+    a1:delete from a1 where ((x=0) and 0=next x);
+    s:exec ind from a1 where x=0;
+    e:exec ind from a1 where (x=1) and 0=next x;
+    m:s where l=n:max l:e-s; / index where max run starts
+    x[first s where l=n]+til n+1
+
  }
 
 /
 Q:100 1000 10000 100000 1000000 10000000 100000000
-{longestRun[t]~longestRun2 t:x?30} each Q
+{(longestRun[p]~longestRun2 p:x?30)} each Q
 
