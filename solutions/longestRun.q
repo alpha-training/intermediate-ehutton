@@ -20,11 +20,31 @@ longestRun3:{
   l:len m;  / length of longest run
   x[s]+til l
  }
-
 longestRun4:{
-  a1:([]v:x;d:1=0N-':x;ind:til count x); / table with index and boolean check
-  a2:delete from a1 where (d=0)&0=next d; / from where we just need to get where one run starts and another run ends
-  a3:select from a2 where (d=0) or 0=next d;
+  a1:([]v:x;d:1=0N-':x); / table with index and boolean check do ind:i from a1 instead of til 
+  a2:select from a1 where not (d=0)and 0=next d; / from where we just need to get where one run starts and another run ends
+  a2:update ind:i from a2;
+  a3:select from a2 where (d=0)or ind=max ind; / ALWAYS DO COND1,COND2. NEVER DO COND1 AND COND 2 
+  a4:update l:0N-':ind from a3;
+  d:exec v,l from a4 where l=max l;
+  reverse (first d`l){x-1}\first d`v
+ }
+
+longestRun5:{[x]
+    t:([] v:x;b:1=0N-':x);
+    t2:select from t where b|next b,not[b]|not next b; / start and end points of runs
+    t3:update spn:0N-':v from t2;
+    t4:select from t3 where b=1;
+    d:select from t4 where spn=max spn;
+    V:first d`v;S:first d`spn;
+    -S+V+1+til S
+    }
+/
+longestRun4:{
+  a1:([]v:x;d:1=0N-':x); / table with index and boolean check do ind:i from a1 instead of til 
+  a1:update ind:i from a1;
+  a2:delete from a1 where (d=0)and 0=next d; / from where we just need to get where one run starts and another run ends
+  a3:select from a2 where (d=0)or 0=next d; / ALWAYS DO COND1,COND2. NEVER DO COND1 AND COND 2 
   a4:update l:0N-':ind from a3;
   a5:select from a4 where d=1;
   a6:select from a5 where l=max l
@@ -38,7 +58,7 @@ s:exec v from a4 where not d;
 e:exec v from a4 where d;
 
 
-longestRun3:{ / longestRun3 x:3 1 2 9 4 8 3 4 5 6 1 4 2 3 4 5 6 7
+longestRun3:{ / longestRun5 x:3 1 2 9 4 8 3 4 5 6 1 4 2 3 4 5 6 7
     x:x,0;
     a1:([]1=0N-':x;ind:til count x);
     a1:delete from a1 where ((x=0) and 0=next x);
