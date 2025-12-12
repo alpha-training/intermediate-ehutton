@@ -6,3 +6,5 @@ to24h:{
     t:?[n&not p;t-12*3600;t]; / 58
     t
  }
+
+to24hopt:{("V"$x)+0 12 -12 0v sum(x like"*PM";2*x like"12*")}

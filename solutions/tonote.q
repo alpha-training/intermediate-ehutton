@@ -1,0 +1,12 @@
+tostr:{$[0=count x;"";0=t:type x;.z.s each x;t in -10 10h;x;string x]};
+
+Intent:([]sym:10#`JPM`JPM`GE;strat:`$"strat",/:string 1+til 10;tgtpos:sums 10#500 -200 300)
+
+
+tonote:{"" sv tostr[x],'"=",'tostr[y],'" "} / 590
+/
+tonote:{ why is this one slower (680)
+    a:tostr(x;y);
+    "" sv a[0],'"=",'a[1],'" "
+    }
+
