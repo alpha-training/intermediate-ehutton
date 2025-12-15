@@ -3,11 +3,11 @@ tostr:{$[0=count x;"";0=t:type x;.z.s each x;t in -10 10h;x;string x]};
 .conf.data:"/disk01/dev"
 .conf.name:"tp0"
 
-expand:{
+expand:{ / total time 290. the ssrs take 250
     x:ssr[x;"$data";.conf.data];
     x:ssr[x;"$name";.conf.name];
     if[sum x="$";a:"/" vs x;
-        a[first where[a like "$*"]]:"MISSING";
+        a first where a like "$*":"MISSING";
         x:(raze/)"/",/:1_a];
     x
  }
