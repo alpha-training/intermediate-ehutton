@@ -5,6 +5,6 @@ expand:{
   k:`$1_/:L;
   m:(L like"$*")&k in key .conf;
   L[where m]:tostr each .conf k where m;
-  if[sum L like "$*"; L:.[L;where L like "$*";:;"MISSING"]];
+  if[sum L like "$*";L:.[L;where L like "$*";:;"MISSING"]];
   raze L
  }
