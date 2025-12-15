@@ -7,8 +7,8 @@ expand:{ / total time 290. the ssrs take 250
     x:ssr[x;"$data";.conf.data];
     x:ssr[x;"$name";.conf.name];
     if[sum x="$";a:"/" vs x;
-        a first where a like "$*":"MISSING";
-        x:(raze/)"/",/:1_a];
+        (a first where a like "$*"):"MISSING";
+        x:raze"/",/:1_a];
     x
  }
 
