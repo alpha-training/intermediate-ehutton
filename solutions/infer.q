@@ -1,31 +1,11 @@
-
-/
 infer:{
-    if[type[x]in 0 98 99h;:.z.s each x];
-    if[type[x]in 0 -10h;:x];
-    if[`D in system"v";:x];
-    if[10h<>type x;x:string x];
-    if[":"=first x;:`$x];
-    safe:(x like"`*")or all(-1_x)in"0123456789-. /:D";
-    if[safe;
-      r:@[get;x;x];
-      if[not r~x;:r]
-    ];
-    if[" "in x;:.z.s each " " vs x];
-    x
- }
-\
-
-infer:{
-    if[101=type x;:x];
-    if[0>type x;:x];
+    if[101=type x;:x];if[0>type x;:x];
     if[type[x]in 0 98 99h;:.z.s each x];
     if[":"=first x;:`$x];
-    safe:(x like"`*")or all(-1_x)in"0123456789-.+ :D";
-    if[safe;
+    if[first[x]in"D";:x];
+    if[(x like"`*")or all(-1_x)in .Q.n,"-.+ :D"; / this is the safety check (if safe...)
       r:@[get;x;x];
-      if[not r~x;:r]
-    ];
+      if[not r~x;:r]]; 
     if[" "in x;:.z.s each " " vs x];
     x
  }
