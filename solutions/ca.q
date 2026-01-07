@@ -10,17 +10,16 @@ adjust:{[x;types]
   ca:select from CA where sym in s;
   if[not types~`all;ca:select from ca where typ in types];
   ca:update cf:prds factor by sym from `sym`date xasc ca;
-  tf:select tf:last cf by sym from ca;
   r:aj[`sym`date;x;ca];
-  r:r lj tf;
+  r:r lj select tf:last cf by sym from ca;
   r:update 1^cf,1^tf,1^factor from r;
   r:update rfactor:tf%cf from r;           
-  r:update price:price*rfactor,size:size%rfactor,notional:price*rfactor*size%rfactor from r;
-  r:delete tf,cf,notional from r;
+  r:update price:price*rfactor,size:size%rfactor from r;
+  r:delete tf,cf from r;
   l:reverse exec typ from r;
-  update typ:reverse({$[y=`;y:x;y]}\)l from r / fill in null typ
+  update typ:reverse({$[y=`;y:x;y]}\)l from r / fill in null typ do we need this? do we want nulls filled in? how does it help us?
  }
-/\l /home/ehutton/intermediate-alf/ca.q_
+\l /home/ehutton/intermediate-alf/ca.q_
 /
 q)adjust[Trade;`dividend]
 date       sym price size     typ      factor rfactor
