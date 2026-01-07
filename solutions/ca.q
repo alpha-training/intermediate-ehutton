@@ -19,7 +19,7 @@ adjust:{[x;types]
   l:reverse exec typ from r;
   update typ:reverse({$[y=`;y:x;y]}\)l from r / fill in null typ do we need this? do we want nulls filled in? how does it help us?
  }
-\l /home/ehutton/intermediate-alf/ca.q_
+/\l /home/ehutton/intermediate-alf/ca.q_
 /
 q)adjust[Trade;`dividend]
 date       sym price size     typ      factor rfactor
